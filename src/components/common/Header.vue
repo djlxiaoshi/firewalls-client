@@ -8,7 +8,7 @@
                     {{username}}
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="loginout">退出</el-dropdown-item>
+                    <el-dropdown-item command="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -29,8 +29,10 @@
         },
         methods:{
             handleCommand(command) {
-                if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                if(command == 'logout'){
+                    this.$http.get('users/logout').then(res => {
+                        console.log(res.body)
+                    }, res => {})
                     this.$router.push('/login');
                 }
             }

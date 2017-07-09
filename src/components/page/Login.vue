@@ -41,10 +41,14 @@
                 const self = this;
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
+                        this.$http.post('users/login', {}).then(res => {
+                            let username = localStorage.setItem('ms_username', this.ruleForm.username);
+                        }, res => {
+                            this.$message.error('服务器异常');
+                        })
+                        self.$router.push('/dhcp');
                     } else {
-                        console.log('error submit!!');
+                        this.$message.error('参数错误');
                         return false;
                     }
                 });

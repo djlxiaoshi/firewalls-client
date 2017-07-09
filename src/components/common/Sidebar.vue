@@ -26,56 +26,61 @@
                 items: [
                     {
                         icon: 'el-icon-setting',
-                        index: 'readme',
-                        title: '自述'
+                        index: '1',
+                        title: '管理配置',
+                        subs: [
+                            {
+                                index: '/dhcp',
+                                title: 'DHCP配置'
+                            },
+                            {
+                                index: '/dns',
+                                title: 'DNS配置'
+                            },
+                            {
+                                index: '/firewalls',
+                                title: '防火墙配置'
+                            },
+                            {
+                                index: '/rules',
+                                title: '规则配置'
+                            },
+                            {
+                                index: '/vpn',
+                                title: 'VPN配置'
+                            },
+                            {
+                                index: '/user',
+                                title: '用户配置'
+                            }
+                        ]
                     },
                     {
                         icon: 'el-icon-menu',
                         index: '2',
-                        title: '表格',
+                        title: '状态显示',
                         subs: [
                             {
-                                index: 'basetable',
-                                title: '基础表格'
+                                index: '/cpu',
+                                title: 'CPU状态'
                             },
                             {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
+                                index: '/flow',
+                                title: '网络流量情况'
+                            },
+                            {
+                                index: '/time',
+                                title: '认证访问实时列表'
+                            },
+                            {
+                                index: '/visit',
+                                title: '端口访问量统计'
+                            },
+                            {
+                                index: '/source',
+                                title: '访问IP来源地统计'
                             }
                         ]
-                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: '3',
-                        title: '表单',
-                        subs: [
-                            {
-                                index: 'baseform',
-                                title: '基本表单'
-                            },
-                            {
-                                index: 'vueeditor',
-                                title: '编辑器'
-                            },
-                            {
-                                index: 'markdown',
-                                title: 'markdown'
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-star-on',
-                        index: 'basecharts',
-                        title: '图表'
-                    },
-                    {
-                        icon: 'el-icon-upload2',
-                        index: 'drag',
-                        title: '拖拽'
                     }
                 ]
             }
