@@ -7,7 +7,11 @@ import Firewalls from '../components/page/Firewalls.vue';
 import RulesConfig from '../components/page/RulesConfig.vue';
 import VPN from '../components/page/VPN.vue';
 import User from '../components/page/User.vue';
+
+// 状态显示
 import CPU from '../components/page/CPU.vue';
+import CPUTmpt from '../components/page/CPUTmpt.vue';
+import NetworkFlow from '../components/page/NetworkFlow.vue';
 
 Vue.use(Router);
 
@@ -37,6 +41,12 @@ export default new Router({
             },{
                 path: '/cpu',
                 component: CPU
+            },{
+                path: '/temperature',
+                component: CPUTmpt
+            },{
+                path: '/flow',
+                component: NetworkFlow
             }]
         },
         {

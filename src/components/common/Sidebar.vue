@@ -65,6 +65,10 @@
                                 title: 'CPU状态'
                             },
                             {
+                                index: '/temperature',
+                                title: 'CPU温度'
+                            },
+                            {
                                 index: '/flow',
                                 title: '网络流量情况'
                             },
