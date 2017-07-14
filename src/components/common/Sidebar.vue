@@ -73,16 +73,15 @@
                                 title: '网络流量情况'
                             },
                             {
-                                index: '/time',
+                                index: '/access-list',
                                 title: '认证访问实时列表'
                             },
                             {
-                                index: '/visit',
-                                title: '端口访问量统计'
-                            },
-                            {
-                                index: '/source',
+                                index: '/ip-source',
                                 title: '访问IP来源地统计'
+                            },{
+                                index: '/echarts-test',
+                                title: 'Echarts测试'
                             }
                         ]
                     }

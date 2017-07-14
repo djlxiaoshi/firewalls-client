@@ -12,6 +12,9 @@ import User from '../components/page/User.vue';
 import CPU from '../components/page/CPU.vue';
 import CPUTmpt from '../components/page/CPUTmpt.vue';
 import NetworkFlow from '../components/page/NetworkFlow.vue';
+import AccessList from '../components/page/AccessList.vue';
+import IpSource from '../components/page/IpSource.vue';
+import EchartTest from '../components/page/EchartTest.vue';
 
 Vue.use(Router);
 
@@ -47,6 +50,15 @@ export default new Router({
             },{
                 path: '/flow',
                 component: NetworkFlow
+            },{
+                path: '/access-list',
+                component: AccessList
+            },{
+                path: '/ip-source',
+                component: IpSource
+            },{
+                path: '/echarts-test',
+                component: EchartTest
             }]
         },
         {
