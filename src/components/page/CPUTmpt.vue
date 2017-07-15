@@ -1,22 +1,6 @@
 <template>
     <div id="cpu-temperature">
-        <el-row>
-            <el-col :span="12" class="chart-wrap">
-                <div id="cpu0-load-chart"></div>
-            </el-col>
-            <el-col :span="12" class="chart-wrap">
-                <div id="cpu1-load-chart"></div>
-            </el-col>
-
-        </el-row>
-        <el-row>
-            <el-col :span="12" class="chart-wrap">
-                <div id="cpu2-load-chart"></div>
-            </el-col>
-            <el-col :span="12" class="chart-wrap">
-                <div id="cpu3-load-chart"></div>
-            </el-col>
-        </el-row>
+        <div id="cpu-temp-chart"></div>
     </div>
 </template>
 
@@ -26,119 +10,99 @@
     export default {
         data () {
             return {
-                cpu0Chart:{},
-                cpu1Chart:{},
-                cpu2Chart:{},
-                cpu3Chart:{},
-                cpu0 : {
-                    title: {
-                        text: 'CPU0温度'
+                option : {
+                    title: [
+                        { text: 'CPU0', left: '0%', top: 0 },
+                        { text: 'CPU1', left: '50%', top: 0 },
+                        { text: 'CPU2', left: '0%', top: '50%' },
+                        { text: 'CPU3', left:'50%', top:'50%' }
+                        ],
+                    legend:[
+                        { data: ['当前温度', '最高温度', '极限温度'], left: '20%' },
+                        { data: ['当前温度', '最高温度', '极限温度'], right: '20%' },
+                        { data: ['当前温度', '最高温度', '极限温度'], left: '20%',top:'50%' },
+                        { data: ['当前温度', '最高温度', '极限温度'], right: '20%',top:'50%' }
+                    ],
+                    grid: [
+                        {x: '2%', y: '7%', width: '45%', height: '38%'},
+                        {x2: '2%', y: '7%', width: '45%', height: '38%'},
+                        {x: '2%', y2: '7%', width: '45%', height: '38%'},
+                        {x2: '2%', y2: '7%', width: '45%', height: '38%'}
+                    ],
+                    xAxis: [
+                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 0},
+                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 1},
+                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 2},
+                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 3},
+                    ],
+                    yAxis: [
+                        { gridIndex: 0},
+                        { gridIndex: 1},
+                        { gridIndex: 2},
+                        { gridIndex: 3},
+                    ],
+                    tooltip: {
+                        formatter: '{a}:{c}'
                     },
-                    tooltip: {},
-                    legend: {
-                        data:['CPU0']
-                    },
-                    xAxis: {
-                        data: []
-                    },
-                    yAxis: {
-                    },
-                    series: [{
-                        name: 'CPU0',
-                        type: 'line',
-                        data: []
-                    }]
-                },
-                cpu1 : {
-                    title: {
-                        text: 'CPU1温度'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data:['CPU1']
-                    },
-                    xAxis: {
-                        data: ["00:00","01:00","02:00","03:00","04:00",
-                            "05:00","06:00","07:00","08:00","09:00",
-                            "10:00","11:00","12:00","13:00","14:00",
-                            "15:00","16:00","17:00","18:00","19:00",
-                        ]
-                    },
-                    yAxis: {
-
-                    },
-                    series: [{
-                        name: 'CPU1',
-                        type: 'line',
-                        data: [
-                            {value:30,
-                                tooltip: {
-                                    formatter: function (param) {
-                                        return param.value + 'test'
-                                    }
-                                 }
-                            }
-                        ]
-
-                    }]
-                },
-                cpu2 : {
-                    title: {
-                        text: 'CPU2温度'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data:['CPU2']
-                    },
-                    xAxis: {
-                        data: ["00:00","01:00","02:00","03:00","04:00",
-                            "05:00","06:00","07:00","08:00","09:00",
-                            "10:00","11:00","12:00","13:00","14:00",
-                            "15:00","16:00","17:00","18:00","19:00",
-                        ]
-                    },
-                    yAxis: {
-
-                    },
-                    series: [{
-                        name: 'CPU2',
-                        type: 'line',
-                        data: [
-                            10,20,5,18,21,
-                            27,34,23,44,23,
-                            32,42,32,24,23,
-                            54,32,23,45,54
-                        ]
-                    }]
-                },
-                cpu3 : {
-                    title: {
-                        text: 'CPU3温度'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data:['CPU3']
-                    },
-                    xAxis: {
-                        data: ["00:00","01:00","02:00","03:00","04:00",
-                            "05:00","06:00","07:00","08:00","09:00",
-                            "10:00","11:00","12:00","13:00","14:00",
-                            "15:00","16:00","17:00","18:00","19:00",
-                        ]
-                    },
-                    yAxis: {
-
-                    },
-                    series: [{
-                        name: 'CPU3',
-                        type: 'line',
-                        data: [
-                            15,27,31,13,23,
-                            11,34,23,56,46,
-                            34,55,32,45,24,
-                            56,34,32,56,34
-                        ]
-                    }]
+                    series: [
+                        {
+                            name: '当前温度',
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            data: [
+                                {value: 7, name: '当前温度', tooltip: {show:true}},
+                                {value: 13, name: '当前温度'},
+                                {value: 5, name: '当前温度'},
+                                {value: 20, name: '当前温度'},
+                            ]
+                        },
+                        {
+                            name: '最高温度',
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            data: [
+                                15,15,15,15,15,
+                                15,15,15,15,15,
+                                15,15,15,15,15,
+                                15,15,15,15,15
+                            ]
+                        },
+                        {
+                            name: '极限温度',
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            data: [
+                                25,25,25,25,25,
+                                25,25,25,25,25,
+                                25,25,25,25,25,
+                                25,25,25,25,25
+                            ]
+                        },
+                        {
+                            name: 'CPU1',
+                            type: 'line',
+                            xAxisIndex: 1,
+                            yAxisIndex: 1,
+                            data: [0,1,5,3,6]
+                        },
+                        {
+                            name: 'CPU2',
+                            type: 'line',
+                            xAxisIndex: 2,
+                            yAxisIndex: 2,
+                            data: [0,1,5,3,6]
+                        },
+                        {
+                            name: 'CPU3',
+                            type: 'line',
+                            xAxisIndex: 3,
+                            yAxisIndex: 3,
+                            data: [0,1,5,3,6]
+                        }
+                    ]
                 }
             }
 
@@ -150,35 +114,13 @@
 
                     }
                 }, res => {})
-            },
-            cpu0Init() {
-                this.cpu0Chart = echarts.init(document.getElementById('cpu0-load-chart'));
-                this.cpu0Chart.setOption(this.cpu0)
-            },
-            cpu1Init() {
-                this.cpu1Chart = echarts.init(document.getElementById('cpu1-load-chart'));
-                this.cpu1Chart.setOption(this.cpu1)
-            },
-            cpu2Init() {
-                this.cpu2Chart = echarts.init(document.getElementById('cpu2-load-chart'));
-                this.cpu2Chart.setOption(this.cpu2)
-            },
-            cpu3Init() {
-                this.cpu3Chart = echarts.init(document.getElementById('cpu3-load-chart'));
-                this.cpu3Chart.setOption(this.cpu3)
-            },
-            chartInit () {
-                this.cpu0Init();
-                this.cpu1Init()
-                this.cpu2Init()
-                this.cpu3Init()
             }
         },
-        created () {
-
-        },
         mounted() {
-            this.chartInit()
+            let chart = echarts.init(document.getElementById('cpu-temp-chart'));
+            chart.setOption(this.option)
+
+
             var date = [];
             var data = [];
             function addData(shift) {
@@ -199,26 +141,20 @@
 
             setInterval( () => {
                 addData(true);
-            this.cpu0Chart.setOption({
-                xAxis: {
-                    data:date
-                },
-                series: [{
-                    data: data
-                }]
-            })
-        }, 500);
-
-
-
-
-
-
-
-
-
-
-
+                chart.setOption({
+                    xAxis: [{
+                        xAxisIndex: 0,
+                        yAxisIndex: 0,
+                        data:date
+                    }],
+                    series: [{
+                        name: '当前温度',
+                        xAxisIndex: 0,
+                        yAxisIndex: 0,
+                        data: data
+                    }]
+                })
+            }, 10000);
         }
     }
 </script>
@@ -230,5 +166,10 @@
     }
     .chart-wrap{
         overflow: auto;
+    }
+
+    #cpu-temp-chart{
+        width:100%;
+        height:600px;
     }
 </style>
