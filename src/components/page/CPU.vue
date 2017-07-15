@@ -170,29 +170,33 @@
                 this.cpu3Init()
             }
         },
-        created () {
-            setInterval(() => {
-
-                // this.myData.series =
-            }, 10000)
-        },
         mounted() {
-            this.chartInit()
+            let _this = this;
+            this.chartInit();
             var date = [];
             var data = [];
             function addData(shift) {
                 var now = new Date();
                 now = [now.getHours(), now.getMinutes(), now.getSeconds()].join(':');
                 date.push(now);
-                data.push((Math.random()) * 50);  // 后台服务器获得
+                _this.$http.get('status/usage').then(res => {
+                    if (res.body.code === 0) {
+                        console.log(res.body.msg.cpu0)
+                        data.push(res.body.msg.cpu0);  // 后台服务器获得
 
-                if (shift) {
-                    date.shift();
-                    data.shift();
-                }
+                        if (shift) {
+                            date.shift();
+                            data.shift();
+                        }
+                    } else {
+                        this.$message.error('未知错误')
+                    }
+                }, res => {
+                    this.$message.error('服务器异常')
+                })
             }
 
-            for (var i = 1; i < 21; i++) {
+            for (var i = 0; i < 20; i++) {
                 addData();
             }
 
@@ -206,7 +210,7 @@
                         data: data
                     }]
                 })
-            }, 500);
+            }, 10000);
 
 
 

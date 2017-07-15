@@ -71,11 +71,15 @@
                         name: 'CPU1',
                         type: 'line',
                         data: [
-                            30,10,5,14,13,
-                            23,24,45,35,32,
-                            14,52,34,56,23,
-                            33,24,53,23,44
+                            {value:30,
+                                tooltip: {
+                                    formatter: function (param) {
+                                        return param.value + 'test'
+                                    }
+                                 }
+                            }
                         ]
+
                     }]
                 },
                 cpu2 : {
