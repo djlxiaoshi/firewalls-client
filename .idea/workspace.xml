@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/CPU.vue" afterPath="$PROJECT_DIR$/src/components/page/CPU.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/CPUTmpt.vue" afterPath="$PROJECT_DIR$/src/components/page/CPUTmpt.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CPU.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CPU.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/CPU.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="785">
-              <caret line="134" column="16" lean-forward="false" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
+            <state relative-caret-position="158">
+              <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding>
                 <element signature="e#3145#3328#0" expanded="false" />
               </folding>
@@ -37,14 +38,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPUTmpt.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CPUTmpt.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/CPUTmpt.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="172" column="21" lean-forward="true" selection-start-line="171" selection-start-column="8" selection-end-line="172" selection-end-column="21" />
-              <folding>
-                <element signature="e#260#4387#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="-1690">
+              <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,7 +51,7 @@
       <file leaf-file-name="CPUTmpt02.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/CPUTmpt02.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
+            <state relative-caret-position="6831">
               <caret line="207" column="16" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="207" selection-end-column="16" />
               <folding />
             </state>
@@ -62,7 +61,7 @@
       <file leaf-file-name="NetworkFlow.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/NetworkFlow.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-263">
+            <state relative-caret-position="627">
               <caret line="20" column="58" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
               <folding>
                 <element signature="e#3021#4261#0" expanded="false" />
@@ -74,19 +73,22 @@
       <file leaf-file-name="status.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../firewalls-serve/routes/status.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="726">
+              <caret line="22" column="38" lean-forward="false" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rules.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../firewalls-serve/routes/rules.js">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="429">
+              <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#239#263#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,8 +126,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../firewalls-serve/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+            <state relative-caret-position="431">
+              <caret line="54" column="27" lean-forward="false" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -181,17 +183,17 @@
         <option value="$PROJECT_DIR$/src/components/page/CPU.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
-        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/components/page/AccessList.vue" />
         <option value="$PROJECT_DIR$/src/components/common/Sidebar.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/page/IpSource.vue" />
         <option value="$PROJECT_DIR$/src/components/page/EchartTest.vue" />
         <option value="$PROJECT_DIR$/src/components/page/NetworkFlow.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/CPUTmpt.vue" />
-        <option value="$PROJECT_DIR$/../firewalls-serve/routes/status.js" />
         <option value="$PROJECT_DIR$/../firewalls-serve/app.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
+        <option value="$PROJECT_DIR$/../firewalls-serve/routes/status.js" />
         <option value="$PROJECT_DIR$/src/components/page/CPU.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/CPUTmpt.vue" />
       </list>
     </option>
   </component>
@@ -469,12 +471,14 @@
       <workItem from="1499995554557" duration="12000" />
       <workItem from="1500031757753" duration="6052000" />
       <workItem from="1500081519903" duration="4356000" />
-      <workItem from="1500114946006" duration="8838000" />
+      <workItem from="1500114946006" duration="8935000" />
+      <workItem from="1500253476626" duration="15000" />
+      <workItem from="1500292072037" duration="4900000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97728000" />
+    <option name="totallyTimeSpent" value="102740000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -631,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/User.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2871">
@@ -705,7 +702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -713,7 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4455">
           <caret line="135" column="55" lean-forward="false" selection-start-line="135" selection-start-column="28" selection-end-line="135" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -751,7 +746,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/NetworkFlow.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-263">
+        <state relative-caret-position="627">
           <caret line="20" column="58" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
           <folding>
             <element signature="e#3021#4261#0" expanded="false" />
@@ -761,45 +756,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/CPUTmpt02.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
+        <state relative-caret-position="6831">
           <caret line="207" column="16" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="207" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../firewalls-serve/routes/status.js">
+    <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="429">
+          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#239#263#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../firewalls-serve/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        <state relative-caret-position="431">
+          <caret line="54" column="27" lean-forward="false" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/CPU.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+          <folding>
+            <element signature="e#3145#3328#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../firewalls-serve/routes/status.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="22" column="38" lean-forward="false" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/CPUTmpt.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="172" column="21" lean-forward="true" selection-start-line="171" selection-start-column="8" selection-end-line="172" selection-end-column="21" />
-          <folding>
-            <element signature="e#260#4387#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/CPU.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="134" column="16" lean-forward="false" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
-          <folding>
-            <element signature="e#3145#3328#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="-1690">
+          <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

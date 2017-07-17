@@ -93,25 +93,33 @@
             let chart = echarts.init(document.getElementById('cpu-load-chart'));
             chart.setOption(this.option)
 
-            var date = [];
-            var data = [];
+            let date = [];
+            let cpu0Data = [];
+            let cpu1Data = []
+            let cpu2Data = []
+            let cpu3Data = []
             function addData(shift) {
                 var now = new Date();
                 now = [now.getHours(), now.getMinutes(), now.getSeconds()].join(':');
                 date.push(now);
                 _this.$http.get('misc_stat/cpu_usage').then(res => {
                     if (res.body.code === 0) {
-                        console.log(res.body.msg.cpu0)
-                        data.push(res.body.msg.cpu0);  // 后台服务器获得
+                        cpu0Data.push(res.body.msg.cpu0);  // 后台服务器获得
+                        cpu1Data.push(res.body.msg.cpu1);  // 后台服务器获得
+                        cpu2Data.push(res.body.msg.cpu2);  // 后台服务器获得
+                        cpu3Data.push(res.body.msg.cpu3);  // 后台服务器获得
                         if (shift) {
                             date.shift();
-                            data.shift();
+                            cpu0Data.shift();
+                            cpu1Data.shift();
+                            cpu2Data.shift();
+                            cpu3Data.shift();
                         }
                     } else {
-                        this.$message.error('未知错误')
+                        _this.$message.error('未知错误')
                     }
                 }, res => {
-                    this.$message.error('服务器异常')
+                    _this.$message.error('服务器异常')
                 })
             }
             for (var i = 0; i < 20; i++) {
@@ -125,38 +133,43 @@
                         xAxisIndex: 0,
                         yAxisIndex: 0,
                         data:date
+                    },{
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data:date
+                    },{
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        data:date
+                    },{
+                        xAxisIndex: 3,
+                        yAxisIndex: 3,
+                        data:date
                     }],
                     series: [{
                         xAxisIndex: 0,
                         yAxisIndex: 0,
-                        data: data
+                        data: cpu0Data
+                    },{
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: cpu1Data
+                    },{
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        data: cpu2Data
+                    },{
+                        xAxisIndex: 3,
+                        yAxisIndex: 3,
+                        data: cpu3Data
                     }]
                 })
             }, 500);
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 </script>
 
 <style scoped>
-    #cpu0-load-chart,#cpu1-load-chart,#cpu2-load-chart,#cpu3-load-chart {
-        width:90%;
-        height: 400px;
-    }
-    .chart-wrap{
-        overflow: auto;
-    }
-
     #cpu-load-chart{
         width:100%;
         height:600px;

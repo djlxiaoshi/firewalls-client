@@ -18,10 +18,10 @@
                         { text: 'CPU3', left:'50%', top:'50%' }
                         ],
                     legend:[
-                        { data: ['当前温度', '最高温度', '极限温度'], left: '20%' },
-                        { data: ['当前温度', '最高温度', '极限温度'], right: '20%' },
-                        { data: ['当前温度', '最高温度', '极限温度'], left: '20%',top:'50%' },
-                        { data: ['当前温度', '最高温度', '极限温度'], right: '20%',top:'50%' }
+                        { data: ['当前温度'], left: '20%' },
+                        { data: ['当前温度'], right: '20%' },
+                        { data: ['当前温度'], left: '20%',top:'50%' },
+                        { data: ['当前温度'], right: '20%',top:'50%' }
                     ],
                     grid: [
                         {x: '2%', y: '7%', width: '45%', height: '38%'},
@@ -36,10 +36,10 @@
                         { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 3},
                     ],
                     yAxis: [
-                        { gridIndex: 0},
-                        { gridIndex: 1},
-                        { gridIndex: 2},
-                        { gridIndex: 3},
+                        { gridIndex: 0,min:0,max:100,splitNumber:10},
+                        { gridIndex: 1,min:0,max:100,splitNumber:10},
+                        { gridIndex: 2,min:0,max:100,splitNumber:10},
+                        { gridIndex: 3,min:0,max:100,splitNumber:10},
                     ],
                     tooltip: {
                         formatter: '{a}:{c}'
@@ -50,57 +50,31 @@
                             type: 'line',
                             xAxisIndex: 0,
                             yAxisIndex: 0,
-                            data: [
-                                {value: 7, name: '当前温度', tooltip: {show:true}},
-                                {value: 13, name: '当前温度'},
-                                {value: 5, name: '当前温度'},
-                                {value: 20, name: '当前温度'},
-                            ]
+                            data: [],
+                            markLine: {
+
+                            }
                         },
                         {
-                            name: '最高温度',
-                            type: 'line',
-                            xAxisIndex: 0,
-                            yAxisIndex: 0,
-                            data: [
-                                15,15,15,15,15,
-                                15,15,15,15,15,
-                                15,15,15,15,15,
-                                15,15,15,15,15
-                            ]
-                        },
-                        {
-                            name: '极限温度',
-                            type: 'line',
-                            xAxisIndex: 0,
-                            yAxisIndex: 0,
-                            data: [
-                                25,25,25,25,25,
-                                25,25,25,25,25,
-                                25,25,25,25,25,
-                                25,25,25,25,25
-                            ]
-                        },
-                        {
-                            name: 'CPU1',
+                            name: '当前温度',
                             type: 'line',
                             xAxisIndex: 1,
                             yAxisIndex: 1,
-                            data: [0,1,5,3,6]
+                            data: []
                         },
                         {
-                            name: 'CPU2',
+                            name: '当前温度',
                             type: 'line',
                             xAxisIndex: 2,
                             yAxisIndex: 2,
-                            data: [0,1,5,3,6]
+                            data: []
                         },
                         {
-                            name: 'CPU3',
+                            name: '当前温度',
                             type: 'line',
                             xAxisIndex: 3,
                             yAxisIndex: 3,
-                            data: [0,1,5,3,6]
+                            data: []
                         }
                     ]
                 }
@@ -117,21 +91,109 @@
             }
         },
         mounted() {
+            let _this = this;
             let chart = echarts.init(document.getElementById('cpu-temp-chart'));
             chart.setOption(this.option)
 
+            chart.setOption({
+                series: [{
+                    xAxisIndex: 0,
+                    yAxisIndex: 0,
+                    markLine: {
+                        data: [{
+                            name: '最高温度',
+                            label: {
+                                emphasis: {
+                                    formatter: '最高温度'
+                                }
+                            },
+                            yAxis: 80
+                        },{
+                            name: '极限温度',
+                            label: {
+                                emphasis: {
+                                    formatter: '极限温度'
+                                }
+                            },
+                            yAxis: 100
+                        }]
+                    }
+                },{
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    markLine: {
+                        data: [{
+                            name: '最高温度',
+                            yAxis: 60
+                        },{
+                            name: '极限温度',
+                            yAxis: 90
+                        }]
+                    }
+                },{
+                    xAxisIndex: 2,
+                    yAxisIndex: 2,
+                    markLine: {
+                        data: [{
+                            name: '最高温度',
+                            label: '最高温度',
+                            yAxis: 80
+                        },{
+                            name: '极限温度',
+                            yAxis: 90
+                        }]
+                    }
+                },{
+                    xAxisIndex: 3,
+                    yAxisIndex: 3,
+                    markLine: {
+                        data: [{
+                            name: '最高温度',
+                            yAxis: 70
+                        },{
+                            name: '极限温度',
+                            yAxis: 85
+                        }]
+                    }
+                }]
+            })
 
-            var date = [];
-            var data = [];
+
+            let date = [];
+            let cpu0Data = [];
+            let cpu1Data = [];
+            let cpu2Data = [];
+            let cpu3Data = [];
             function addData(shift) {
                 var now = new Date();
                 now = [now.getHours(), now.getMinutes(), now.getSeconds()].join(':');
                 date.push(now);
-                data.push((Math.random()) * 50);  // 后台服务器获得
+                _this.$http.get('misc_stat/cpu_temperature').then(res => {
+                    if (res.body.code === 0) {
+                        cpu0Data.push(res.body.msg.cpu0[0]);  // 后台服务器获得
+                        cpu1Data.push(res.body.msg.cpu1[0]);  // 后台服务器获得
+                        cpu2Data.push(res.body.msg.cpu2[0]);  // 后台服务器获得
+                        cpu3Data.push(res.body.msg.cpu3[0]);  // 后台服务器获得
+                        if (shift) {
+                            date.shift();
+                            cpu0Data.shift();
+                            cpu1Data.shift();
+                            cpu2Data.shift();
+                            cpu3Data.shift();
+                        }
+                    } else {
+                        _this.$message.error('未知错误')
+                    }
+                }, res => {
+                    _this.$message.error('服务器异常')
+                })
 
                 if (shift) {
                     date.shift();
-                    data.shift();
+                    cpu0Data.shift();
+                    cpu1Data.shift();
+                    cpu2Data.shift();
+                    cpu3Data.shift();
                 }
             }
 
@@ -146,12 +208,39 @@
                         xAxisIndex: 0,
                         yAxisIndex: 0,
                         data:date
+                    },{
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data:date
+                    },{
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        data:date
+                    },{
+                        xAxisIndex: 3,
+                        yAxisIndex: 3,
+                        data:date
                     }],
                     series: [{
                         name: '当前温度',
                         xAxisIndex: 0,
                         yAxisIndex: 0,
-                        data: data
+                        data:cpu0Data
+                    },{
+                        name: '当前温度',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data:cpu1Data
+                    },{
+                        name: '当前温度',
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        data:cpu2Data
+                    },{
+                        name: '当前温度',
+                        xAxisIndex: 3,
+                        yAxisIndex: 3,
+                        data:cpu3Data
                     }]
                 })
             }, 10000);
@@ -160,14 +249,6 @@
 </script>
 
 <style scoped>
-    #cpu0-load-chart,#cpu1-load-chart,#cpu2-load-chart,#cpu3-load-chart {
-        width:90%;
-        height: 400px;
-    }
-    .chart-wrap{
-        overflow: auto;
-    }
-
     #cpu-temp-chart{
         width:100%;
         height:600px;
