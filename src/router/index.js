@@ -14,6 +14,8 @@ import CPUTmpt from '../components/page/CPUTmpt.vue';
 import NetworkFlow from '../components/page/NetworkFlow.vue';
 import AccessList from '../components/page/AccessList.vue';
 import IpSource from '../components/page/IpSource.vue';
+
+// echarts 测试
 import EchartTest from '../components/page/EchartTest.vue';
 
 Vue.use(Router);

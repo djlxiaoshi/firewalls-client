@@ -1,6 +1,7 @@
 <template>
     <div id="cpu-load">
         <div id="cpu-load-chart"></div>
+        <commonChart></commonChart>
     </div>
 </template>
 
