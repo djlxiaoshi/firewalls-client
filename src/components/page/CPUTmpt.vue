@@ -1,85 +1,135 @@
 <template>
     <div id="cpu-temperature">
-        <div id="cpu-temp-chart"></div>
+        <el-row :gutter="0">
+            <el-col :xs="24" :sm="24" :md="24" :lg="12">
+                <CommonChart :options="Object.assign(CPU0Config, commonConfig)"></CommonChart>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="12">
+                <CommonChart :options="Object.assign(CPU1Config, commonConfig)"></CommonChart>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="12">
+                <CommonChart :options="Object.assign(CPU2Config, commonConfig)"></CommonChart>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="12">
+                <CommonChart :options="Object.assign(CPU3Config, commonConfig)"></CommonChart>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
-    import echarts from 'echarts'
+    import CommonChart from './CommonChart.vue'
+
+    const CONFIG = {
+        cpu0: 'CPU0Config',
+        cpu1: 'CPU1Config',
+        cpu2: 'CPU2Config',
+        cpu3: 'CPU3Config'
+    }
 
     export default {
         data () {
             return {
-                option : {
-                    title: [
-                        { text: 'CPU0', left: '0%', top: 0 },
-                        { text: 'CPU1', left: '50%', top: 0 },
-                        { text: 'CPU2', left: '0%', top: '50%' },
-                        { text: 'CPU3', left:'50%', top:'50%' }
-                        ],
-                    legend:[
-                        { data: ['当前温度'], left: '20%' },
-                        { data: ['当前温度'], right: '20%' },
-                        { data: ['当前温度'], left: '20%',top:'50%' },
-                        { data: ['当前温度'], right: '20%',top:'50%' }
-                    ],
-                    grid: [
-                        {x: '2%', y: '7%', width: '45%', height: '38%'},
-                        {x2: '2%', y: '7%', width: '45%', height: '38%'},
-                        {x: '2%', y2: '7%', width: '45%', height: '38%'},
-                        {x2: '2%', y2: '7%', width: '45%', height: '38%'}
-                    ],
-                    xAxis: [
-                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 0},
-                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 1},
-                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 2},
-                        { data: ["00:00","01:00","02:00","03:00","04:00"],gridIndex: 3},
-                    ],
-                    yAxis: [
-                        { gridIndex: 0,min:0,max:100,splitNumber:10},
-                        { gridIndex: 1,min:0,max:100,splitNumber:10},
-                        { gridIndex: 2,min:0,max:100,splitNumber:10},
-                        { gridIndex: 3,min:0,max:100,splitNumber:10},
-                    ],
+                commonConfig: {
+                    xAxis: {
+                        data: ['1', '2','3','4','5','6','7','8','9','10']
+                    },
+                    yAxis: {
+                    },
+                    tooltip: {
+                        formatter: '{a}:{c}',
+                    },
+                    legend: {
+                        data: ['当前温度', '最高温度', '极限温度']
+                    },
+                },
+                CPU0Config: {
+                    title: {
+                        text: 'CPU0'
+                    },
+                    series:[{
+                        name: '当前温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '最高温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '极限温度',
+                        type: 'line',
+                        data: [],
+                    }]
+                },
+                CPU1Config: {
+                    title: {
+                        text: 'CPU1'
+                    },
                     tooltip: {
                         formatter: '{a}:{c}'
                     },
-                    series: [
-                        {
-                            name: '当前温度',
-                            type: 'line',
-                            xAxisIndex: 0,
-                            yAxisIndex: 0,
-                            data: [],
-                            markLine: {
-
-                            }
-                        },
-                        {
-                            name: '当前温度',
-                            type: 'line',
-                            xAxisIndex: 1,
-                            yAxisIndex: 1,
-                            data: []
-                        },
-                        {
-                            name: '当前温度',
-                            type: 'line',
-                            xAxisIndex: 2,
-                            yAxisIndex: 2,
-                            data: []
-                        },
-                        {
-                            name: '当前温度',
-                            type: 'line',
-                            xAxisIndex: 3,
-                            yAxisIndex: 3,
-                            data: []
-                        }
-                    ]
-                }
+                    series:[{
+                        name: '当前温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '最高温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '极限温度',
+                        type: 'line',
+                        data: [],
+                    }]
+                },
+                CPU2Config: {
+                    title: {
+                        text: 'CPU2'
+                    },
+                    tooltip: {
+                        formatter: '{a}:{c}'
+                    },
+                    series:[{
+                        name: '当前温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '最高温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '极限温度',
+                        type: 'line',
+                        data: [],
+                    }]
+                },
+                CPU3Config: {
+                    title: {
+                        text: 'CPU3'
+                    },
+                    tooltip: {
+                        formatter: '{a}:{c}'
+                    },
+                    series:[{
+                        name: '当前温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '最高温度',
+                        type: 'line',
+                        data: [],
+                    },{
+                        name: '极限温度',
+                        type: 'line',
+                        data: [],
+                    }]
+                },
+                timerCount: 0
             }
 
+        },
+        components: {
+            CommonChart
         },
         methods: {
             getData () {
@@ -88,162 +138,49 @@
 
                     }
                 }, res => {})
+            },
+            refreshDate(){
+                let _now = new Date();
+                let _formatNow = [_now.getHours(), _now.getMinutes(), _now.getSeconds()].join(':');
+                this.commonConfig.xAxis.data.push(_formatNow)
+                if (this.commonConfig.xAxis.data.length >= 10) {
+                    this.commonConfig.xAxis.data.shift()
+                }
+            },
+            refreshData(cpuName) {
+                this.$http.get('misc_stat/cpu_temperature').then(res => {
+                    if (res.body.code === 0) {
+                        if(this[CONFIG[cpuName]].series && this[CONFIG[cpuName]].series.length){
+                            this[CONFIG[cpuName]].series.forEach((item, index)=> {
+                                item.data.push(res.body.msg[cpuName][index])
+                                if (item.data.length >= 10) {
+                                    item.data.shift()
+                                }
+                            })
+                        }
+                    } else {
+                        this.$message.error('客户端错误')
+                    }
+                }, res => {
+                    this.$message.error('服务器异常')
+                })
+            },
+            refresh () {
+                this.refreshDate()
+
+                this.refreshData('cpu0')
+                this.refreshData('cpu1')
+                this.refreshData('cpu2')
+                this.refreshData('cpu3')
             }
         },
         mounted() {
-            let _this = this;
-            let chart = echarts.init(document.getElementById('cpu-temp-chart'));
-            chart.setOption(this.option)
-
-            chart.setOption({
-                series: [{
-                    xAxisIndex: 0,
-                    yAxisIndex: 0,
-                    markLine: {
-                        data: [{
-                            name: '最高温度',
-                            label: {
-                                emphasis: {
-                                    formatter: '最高温度'
-                                }
-                            },
-                            yAxis: 80
-                        },{
-                            name: '极限温度',
-                            label: {
-                                emphasis: {
-                                    formatter: '极限温度'
-                                }
-                            },
-                            yAxis: 100
-                        }]
-                    }
-                },{
-                    xAxisIndex: 1,
-                    yAxisIndex: 1,
-                    markLine: {
-                        data: [{
-                            name: '最高温度',
-                            yAxis: 60
-                        },{
-                            name: '极限温度',
-                            yAxis: 90
-                        }]
-                    }
-                },{
-                    xAxisIndex: 2,
-                    yAxisIndex: 2,
-                    markLine: {
-                        data: [{
-                            name: '最高温度',
-                            label: '最高温度',
-                            yAxis: 80
-                        },{
-                            name: '极限温度',
-                            yAxis: 90
-                        }]
-                    }
-                },{
-                    xAxisIndex: 3,
-                    yAxisIndex: 3,
-                    markLine: {
-                        data: [{
-                            name: '最高温度',
-                            yAxis: 70
-                        },{
-                            name: '极限温度',
-                            yAxis: 85
-                        }]
-                    }
-                }]
-            })
-
-
-            let date = [];
-            let cpu0Data = [];
-            let cpu1Data = [];
-            let cpu2Data = [];
-            let cpu3Data = [];
-            function addData(shift) {
-                var now = new Date();
-                now = [now.getHours(), now.getMinutes(), now.getSeconds()].join(':');
-                date.push(now);
-                _this.$http.get('misc_stat/cpu_temperature').then(res => {
-                    if (res.body.code === 0) {
-                        cpu0Data.push(res.body.msg.cpu0[0]);  // 后台服务器获得
-                        cpu1Data.push(res.body.msg.cpu1[0]);  // 后台服务器获得
-                        cpu2Data.push(res.body.msg.cpu2[0]);  // 后台服务器获得
-                        cpu3Data.push(res.body.msg.cpu3[0]);  // 后台服务器获得
-                        if (shift) {
-                            date.shift();
-                            cpu0Data.shift();
-                            cpu1Data.shift();
-                            cpu2Data.shift();
-                            cpu3Data.shift();
-                        }
-                    } else {
-                        _this.$message.error('未知错误')
-                    }
-                }, res => {
-                    _this.$message.error('服务器异常')
-                })
-
-                if (shift) {
-                    date.shift();
-                    cpu0Data.shift();
-                    cpu1Data.shift();
-                    cpu2Data.shift();
-                    cpu3Data.shift();
-                }
-            }
-
-            for (var i = 1; i < 21; i++) {
-                addData();
-            }
-
-            setInterval( () => {
-                addData(true);
-                chart.setOption({
-                    xAxis: [{
-                        xAxisIndex: 0,
-                        yAxisIndex: 0,
-                        data:date
-                    },{
-                        xAxisIndex: 1,
-                        yAxisIndex: 1,
-                        data:date
-                    },{
-                        xAxisIndex: 2,
-                        yAxisIndex: 2,
-                        data:date
-                    },{
-                        xAxisIndex: 3,
-                        yAxisIndex: 3,
-                        data:date
-                    }],
-                    series: [{
-                        name: '当前温度',
-                        xAxisIndex: 0,
-                        yAxisIndex: 0,
-                        data:cpu0Data
-                    },{
-                        name: '当前温度',
-                        xAxisIndex: 1,
-                        yAxisIndex: 1,
-                        data:cpu1Data
-                    },{
-                        name: '当前温度',
-                        xAxisIndex: 2,
-                        yAxisIndex: 2,
-                        data:cpu2Data
-                    },{
-                        name: '当前温度',
-                        xAxisIndex: 3,
-                        yAxisIndex: 3,
-                        data:cpu3Data
-                    }]
-                })
-            }, 10000);
+            this.timerCount = setInterval(() => {
+                this.refresh()
+            }, 1000)
+        },
+        destroyed() {
+            clearInterval(this.timerCount)
         }
     }
 </script>
