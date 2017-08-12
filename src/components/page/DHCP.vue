@@ -2,29 +2,57 @@
     <div id="dhcp">
         <el-form  :model="formInline" class="demo-form-inline" label-position="top">
             <el-form-item label="子网络号">
-                <el-input-number v-model="subnet[0]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="netDisbled"></el-input-number>
-                <el-input-number v-model="subnet[1]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="netDisbled"></el-input-number>
-                <el-input-number v-model="subnet[2]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="netDisbled"></el-input-number>
-                <el-input-number v-model="subnet[3]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="netDisbled"></el-input-number>
-                <el-button :plain="true" type="danger" size="small" @click="netEdit">{{netDisbled ? '修改' : '保存'}}</el-button>
+                <el-input
+                    v-for="(item, index) in subnet"
+                    v-model="subnet[index]"
+                    icon="edit"
+                    type="number"
+                    :min="0" :max="255"
+                    :controls="false"
+                    class="num-input"
+                    :disabled="netDisbled"
+                    :on-icon-click="netEdit"
+                    @change="saveChange({net: subnet.join('.')})"
+                    @blur="netDisbled = !netDisbled"
+                    >
+                </el-input>
             </el-form-item>
             <el-form-item label="IP地址分配范围">
                 <div>
-                    <el-input-number v-model="rangeStart[0]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeStart[1]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeStart[2]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeStart[3]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
+                    <el-input
+                        icon="edit"
+                        type="number"
+                        v-for="(item, index) in rangeStart"
+                        v-model="rangeStart[index]"
+                        :min="0" :max="255"
+                        :controls="false"
+                        class="num-input"
+                        :disabled="rangeDisbled"
+                        size="small"
+                        :on-icon-click="rangeEdit"
+                        @change="saveChange({range: [rangeStart.join('.'), rangeEnd.join('.')]})"
+                        @blur="rangeDisbled = !rangeDisbled"
+                    ></el-input>
                 </div>
                 <div>
-                    <el-input-number v-model="rangeEnd[0]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeEnd[1]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeEnd[2]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-input-number v-model="rangeEnd[3]"  :min="0" :max="255" :controls="false"  class="num-input" :disabled="rangeDisbled"></el-input-number>
-                    <el-button :plain="true" type="danger" size="small" @click="rangeEdit">{{rangeDisbled ? '修改' : '保存'}}</el-button>
+                    <el-input
+                        icon="edit"
+                        type="number"
+                        v-for="(item, index) in rangeEnd"
+                        v-model="rangeEnd[index]"
+                        :min="0" :max="255"
+                        :controls="false"
+                        class="num-input"
+                        :disabled="rangeDisbled"
+                        size="small"
+                        :on-icon-click="rangeEdit"
+                        @change="saveChange(rangeStart, rangeEnd)"
+                        @blur="rangeDisbled = !rangeDisbled"
+                    ></el-input>
                 </div>
             </el-form-item>
             <el-form-item label="IP地址绑定">
-                    <el-table :data="tableData" style="width: 100%">
+                    <el-table :data="tableData" style="width: 100%" border>
                         <el-table-column label="mac地址" width="250">
                             <template scope="scope">
                                 <el-input v-model="scope.row.mac" placeholder="请输入内容" v-if="scope.row.isEdit"></el-input>
@@ -57,7 +85,7 @@
         </el-form>
 
 
-        <el-dialog title="添加" :visible.sync="dialogFormVisible">
+        <el-dialog title="添加" :visible.sync="dialogFormVisible" size="tiny">
             <el-form :model="addForm" label-position="left"  label-width="50px">
                 <el-form-item label="mac">
                     <el-input v-model="addForm.mac" auto-complete="off"></el-input>
@@ -88,7 +116,7 @@
                 netDisbled:true,
                 rangeDisbled:true,
                 ipDisbled:true,
-                subnet: [0,0,0,0],
+                subnet: [10,0,0,1],
                 rangeStart: [0,0,0,0],
                 rangeEnd: [0,0,0,0],
                 tableData: [{
@@ -118,28 +146,28 @@
             }, res => {})
         },
         methods: {
-            netEdit () {
-                if (this.netDisbled) {
-                    // 修改
-                    this.netDisbled = false
-                } else {
-                    let _netData = {
-                        net: this.subnet.join('.')
+            test(){
+                console.log(21345)
+            },
+            sendReq(data) {
+                this.$http.post('dhcp/modify', data).then(res => {
+                    if (res.body.code === 0) {
+                        this.$message.success('修改成功')
+                    } else {
+                        this.$message.error('客户端错误')
                     }
-                    // 保存
-                    this.netDisbled = true
+                }, res => {
+                    this.$message.error('服务器异常')
+                })
+            },
+            saveChange (data) {
+                setTimeout( ()=> {
                     // 发送ajax请求
-                    this.$http.post('dhcp/modify', _netData).then(res => {
-                        if (res.body.code === 0) {
-                            this.$message.success('修改成功')
-                        } else {
-                            this.$message.error('修改失败')
-                        }
-                    }, res => {
-                        this.$message.error('服务器异常')
-                    })
-                }
-
+                    this.sendReq(data)
+                }, 500)
+            },
+            netEdit () {
+                this.netDisbled = !this.netDisbled
             },
             rangeEdit () {
                 if (this.rangeDisbled) {
@@ -218,6 +246,8 @@
     }
     .num-input {
         vertical-align: middle;
+        width:100px;
+        margin: 10px;
     }
    .dot {
        display: inline-block;

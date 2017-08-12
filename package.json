@@ -1,11 +1,11 @@
 {
   "name": "manage-system",
   "version": "2.1.0",
-  "description": "基于Vue.js 2.x系列 + element-ui 内容管理系统解决方案",
-  "author": "lin-xin <2981207131@qq.com>",
+  "description": "防火墙后台管理系统",
+  "author": "DJLXS <1281233206@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "node build/dev-server.js -d --hot --colors --inline",
     "build": "node build/build.js",
     "build:dll": "webpack --config build/webpack.dll.conf.js"
   },

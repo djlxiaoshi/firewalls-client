@@ -12,7 +12,6 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>
             </el-form>
         </div>
     </div>
@@ -21,6 +20,16 @@
 <script>
     export default {
         data: function(){
+            let checkName = (rule, value, callback) => {
+                let regexp = /[^A-Za-z0-9\-\_\@\.]/i
+                if (!value) {
+                    return callback(new Error('不能为空'));
+                } else if (regexp.test(value)) {
+                    return callback(new Error('用户名只能包含A-Z a-z 0-9 - _ @.等字符'));
+                }  else {
+                    callback();
+                }
+            };
             return {
                 ruleForm: {
                     username: '',
@@ -28,7 +37,7 @@
                 },
                 rules: {
                     username: [
-                        { required: true, message: '请输入用户名', trigger: 'blur' }
+                        { trigger: 'blur' ,validator: checkName}
                     ],
                     password: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
@@ -39,19 +48,21 @@
         methods: {
             submitForm(formName) {
                 const self = this;
+                debugger
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$http.post('users/login', {}).then(res => {
-                            let username = localStorage.setItem('ms_username', this.ruleForm.username);
+                        this.$http.post('users/login', {username: this.username, password: this.password}).then(res => {
+                            if (res.body.code === 0) {
+                                this.$message.success('登录成功');
+                                self.$router.push('/dhcp');
+                            } else {
+                                this.$message.error('客户端错误');
+                            }
                         }, res => {
                             this.$message.error('服务器异常');
                         })
-                        self.$router.push('/dhcp');
-                    } else {
-                        this.$message.error('参数错误');
-                        return false;
                     }
-                });
+                })
             }
         }
     }
