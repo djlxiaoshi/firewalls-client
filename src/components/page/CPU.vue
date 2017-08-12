@@ -14,8 +14,6 @@
                 <CommonChart :options="Object.assign(CPU3Config, commonConfig)"></CommonChart>
             </el-col>
         </el-row>
-
-        <el-button type="success" @click="change">成功按钮</el-button>
     </div>
 </template>
 
@@ -120,11 +118,6 @@
 
                     }
                 }, res => {})
-            },
-            change(){
-                this.CPU0Config.title = {
-                    text: '测试'
-                }
             },
             refreshDate(){
                 let _now = new Date();
