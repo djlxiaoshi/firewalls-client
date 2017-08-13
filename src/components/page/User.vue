@@ -32,7 +32,7 @@
                 </el-form-item>
                 <el-form-item label="权限">
                     <el-checkbox-group v-model="addForm.perms">
-                        <el-checkbox :label="item" v-for=" item in msg.perms_list"></el-checkbox>
+                        <el-checkbox :label="item" v-for=" item in msg.perms_list" :key="item"></el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
             </el-form>
@@ -83,6 +83,7 @@
         methods: {
             addBtn () {
                 this.dialogFormVisible = true
+                this.flag = true
             },
             add () {
                 // 添加
@@ -127,15 +128,27 @@
                 })
             },
             del (index ,row) {
-                this.$http.post(`user/delete`,{uid:row.uid}).then(res => {
-                    if (res.body.code === 0) {
-                        this.msg.user.list.splice(index, 1)
-                    } else {
-                        this.$message.error('其他错误');
-                    }
-                }, res => {
-                    this.$message.error('服务器异常');
-                })
+                this.$confirm('确定删除该配置想吗?', '警告', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.post(`user/delete`,{uid:row.uid}).then(res => {
+                        if (res.body.code === 0) {
+                            this.msg.user.list.splice(index, 1)
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                        } else {
+                            this.$message.error('其他错误');
+                        }
+                    }, res => {
+                        this.$message.error('服务器异常');
+                    })
+                }).catch(() => {
+
+                });
             },
             download (index, row) {
                 this.$http.get(`user/download_key?uid=${row.uid}`).then(res => {

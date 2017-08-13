@@ -18,7 +18,7 @@
     export default {
         data() {
             return {
-                name: 'linxin'
+                name: 'djlxs'
             }
         },
         computed:{
@@ -30,10 +30,12 @@
         methods:{
             handleCommand(command) {
                 if(command == 'logout'){
-                    this.$http.get('users/logout').then(res => {
-                        console.log(res.body)
+                    this.$http.post('admin/logout').then(res => {
+                        if (res.body.code === 0) {
+                            this.$message.success('您已退出登录')
+                            this.$router.push('/login');
+                        }
                     }, res => {})
-                    this.$router.push('/login');
                 }
             }
         }
