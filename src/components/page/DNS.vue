@@ -1,28 +1,28 @@
 <template>
     <div id="dns">
         <el-form  class="demo-form-inline" label-position="left" label-width="120px">
-            <el-form-item label="默认DNS服务器">
+            <el-form-item label="默认DNS服务器" prop="dns0">
                 <el-input v-model="msg.forwarders[0]" :disabled="fwd_0_dis">
                     <template slot="append">
                         <a href="javascript:void(0)" @click="editFwd_0">{{fwd_0_dis ? '修改' : '保存'}}</a>
                     </template>
                 </el-input>
             </el-form-item>
-            <el-form-item >
+            <el-form-item prop="dns1">
                 <el-input v-model="msg.forwarders[1]" :disabled="fwd_1_dis">
                     <template slot="append">
                         <a href="javascript:void(0)" @click="editFwd_1">{{fwd_1_dis ? '修改' : '保存'}}</a>
                     </template>
                 </el-input>
             </el-form-item>
-            <el-form-item label="本地域名">
+            <el-form-item label="本地域名" prop="domain">
                 <el-input v-model="msg.domain_maps.domain" placeholder="本地域名" :disabled="domian_dis">
                     <template slot="append">
                         <a href="javascript:void(0)" @click="editDomain">{{domian_dis ? '修改' : '保存'}}</a>
                     </template>
                 </el-input>
             </el-form-item>
-            <el-form-item label="IP">
+            <el-form-item label="IP" prop="ip">
                 <el-input v-model="msg.domain_maps.ip" placeholder="IP地址" :disabled="ip_dis">
                     <template slot="append">
                         <a href="javascript:void(0)" @click="editIp">{{ip_dis ? '修改' : '保存'}}</a>
@@ -61,6 +61,11 @@
             })
         },
         methods: {
+            isValid(){
+                this.$refs['form'].validate((valid) => {
+                   return valid ? true : false
+                });
+            },
             editFwd_0 () {
                 if (!this.fwd_0_dis) {
                     let _forwarders = this.msg.forwarders
@@ -70,22 +75,30 @@
             },
             editFwd_1 () {
                 if (!this.fwd_1_dis) {
+                    if(!this.isValid()){return}
                     let _forwarders = this.msg.forwarders
                     this.sendReq({forwarders: _forwarders})
                 }
                 this.fwd_1_dis = !this.fwd_1_dis
             },
             sendReq (params) {
-                // 保存
-                this.$http.post('dns/modify', params).then(res => {
-                    if (res.body.code === 0) {
-                        this.$message.success('修改成功')
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+                        // 保存
+                        this.$http.post('dns/modify', params).then(res => {
+                            if (res.body.code === 0) {
+                                this.$message.success('修改成功')
+                            } else {
+                                this.$message.error('其他错误')
+                            }
+                        }, res => {
+                            this.$message.error('服务器异常')
+                        })
                     } else {
-                        this.$message.error('其他错误')
+                        return false;
                     }
-                }, res => {
-                    this.$message.error('服务器异常')
-                })
+                });
+
             },
             editDomain () {
                 if (!this.domian_dis) {

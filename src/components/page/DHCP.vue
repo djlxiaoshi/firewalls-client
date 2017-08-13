@@ -1,24 +1,22 @@
 <template>
     <div id="dhcp">
-        <el-form  :model="formInline" class="demo-form-inline" label-position="top">
+        <el-form  :model="formInline" class="demo-form-inline" label-position="left">
             <el-form-item label="子网络号">
                 <el-input
+                    class="num-input"
                     v-for="(item, index) in subnet"
                     v-model="subnet[index]"
                     icon="edit"
                     type="number"
                     :min="0" :max="255"
-                    :controls="false"
-                    class="num-input"
-                    :disabled="netDisbled"
-                    :on-icon-click="netEdit"
+                    :disabled="netDisabled"
                     @change="saveChange({net: subnet.join('.')})"
-                    @blur="netDisbled = !netDisbled"
+                    @click="netDisabled = false"
+                    @blur="netDisabled = true"
                     >
                 </el-input>
             </el-form-item>
-            <el-form-item label="IP地址分配范围">
-                <div>
+            <el-form-item label="IP起始地址">
                     <el-input
                         icon="edit"
                         type="number"
@@ -27,14 +25,14 @@
                         :min="0" :max="255"
                         :controls="false"
                         class="num-input"
-                        :disabled="rangeDisbled"
+                        :disabled="rangeDisabled"
                         size="small"
-                        :on-icon-click="rangeEdit"
+                        @click="rangeDisabled = false"
                         @change="saveChange({range: [rangeStart.join('.'), rangeEnd.join('.')]})"
-                        @blur="rangeDisbled = !rangeDisbled"
+                        @blur="rangeDisabled = true"
                     ></el-input>
-                </div>
-                <div>
+            </el-form-item>
+            <el-form-item label="IP结束地址">
                     <el-input
                         icon="edit"
                         type="number"
@@ -43,13 +41,12 @@
                         :min="0" :max="255"
                         :controls="false"
                         class="num-input"
-                        :disabled="rangeDisbled"
+                        :disabled="rangeDisabled"
                         size="small"
-                        :on-icon-click="rangeEdit"
-                        @change="saveChange(rangeStart, rangeEnd)"
-                        @blur="rangeDisbled = !rangeDisbled"
+                        @click="rangeDisabled = false"
+                        @change="saveChange({range: [rangeStart.join('.'), rangeEnd.join('.')]})"
+                        @blur="rangeDisabled = true"
                     ></el-input>
-                </div>
             </el-form-item>
             <el-form-item label="IP地址绑定">
                     <el-table :data="tableData" style="width: 100%" border>
@@ -86,17 +83,19 @@
 
 
         <el-dialog title="添加" :visible.sync="dialogFormVisible" size="tiny">
-            <el-form :model="addForm" label-position="left"  label-width="50px">
-                <el-form-item label="mac">
-                    <el-input v-model="addForm.mac" auto-complete="off"></el-input>
+            <el-form :model="addForm" label-position="left"  label-width="50px" :rules="rules" ref="addForm">
+                <el-form-item label="mac" style="width: 340px;" prop="mac">
+                    <el-input v-model="addForm.mac"></el-input>
                 </el-form-item>
                 <el-form-item label="ip">
-                    <div>
-                        <el-input-number v-model="addForm.ip[0]"  :min="0" :max="255" :controls="false" size="small" class="num-input"></el-input-number>
-                        <el-input-number v-model="addForm.ip[1]"  :min="0" :max="255" :controls="false" size="small" class="num-input"></el-input-number>
-                        <el-input-number v-model="addForm.ip[2]"  :min="0" :max="255" :controls="false" size="small" class="num-input"></el-input-number>
-                        <el-input-number v-model="addForm.ip[3]"  :min="0" :max="255" :controls="false" size="small" class="num-input"></el-input-number>
-                    </div>
+                    <el-input
+                        style="width: 50px;margin-right: 27px;"
+                        type="number"
+                        v-for="(item, index) in addForm['ip']"
+                        v-model="addForm.ip[index]"
+                        :min="0" :max="255"
+                        size="small"
+                    ></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -113,9 +112,9 @@
             return {
                 dhcpData:{},
                 formInline: {},
-                netDisbled:true,
-                rangeDisbled:true,
-                ipDisbled:true,
+                netDisabled:true,
+                rangeDisabled:true,
+                ipDisabled:true,
                 subnet: [10,0,0,1],
                 rangeStart: [0,0,0,0],
                 rangeEnd: [0,0,0,0],
@@ -133,6 +132,11 @@
                 addForm: {
                     mac: '',
                     ip: [0,0,0,0]
+                },
+                rules: {
+                    mac: [
+                        {required: true, message: '请填写mac地址', trigger: 'blur' }
+                    ]
                 }
             }
         },
@@ -146,9 +150,6 @@
             }, res => {})
         },
         methods: {
-            test(){
-                console.log(21345)
-            },
             sendReq(data) {
                 this.$http.post('dhcp/modify', data).then(res => {
                     if (res.body.code === 0) {
@@ -166,53 +167,13 @@
                     this.sendReq(data)
                 }, 500)
             },
-            netEdit () {
-                this.netDisbled = !this.netDisbled
-            },
-            rangeEdit () {
-                if (this.rangeDisbled) {
-                    // 修改
-                    this.rangeDisbled = false
-                } else {
-                    let _rangeData = {}
-                    let _rangeArr = []
-                    _rangeArr.push(this.rangeStart.join('.'))
-                    _rangeArr.push(this.rangeEnd.join('.'))
-                    _rangeData.range = _rangeArr
-                    console.log('range', _rangeData)
-                    // 保存
-                    this.rangeDisbled = true
-                    // 发送ajax请求
-                    this.$http.post('dhcp/modify', _rangeData).then(res => {
-                        if (res.body.code === 0) {
-                            this.$message.success('修改成功')
-                        } else {
-                            this.$message.error('修改失败')
-                        }
-                    }, res => {
-                        this.$message.error('服务器异常')
-                    })
-                }
-            },
             saveEdit (index, row) {
                 if (!row.isEdit) {
                     // 修改
                     // todo
                 } else {
-                    let _ipMacData = {
-                        mac: row.mac,
-                        ip: row.ip
-                    }
                     // 保存
-                    this.$http.post('dhcp/modify', _ipMacData).then(res => {
-                        if (res.body.code === 0) {
-                            this.$message.success('修改成功')
-                        } else {
-                            this.$message.error('修改失败')
-                        }
-                    }, res => {
-                        this.$message.error('服务器异常')
-                    })
+                    this.sendReq({mac: row.mac,ip: row.ip})
                 }
                 this.$set(row, 'isEdit', !row.isEdit)
             },
@@ -220,20 +181,41 @@
                 if (!row.isEdit) {
                     // 删除
                     // todo
-                    this.tableData.splice(index, 1)
+                    this.$alert('确定删除这条配置吗？', '警告', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning',
+                    }).then(() => {
+                        // 这里要进行一些请求操作
+
+                        this.tableData.splice(index, 1)
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }).catch(() => {
+
+                    });
                 } else {
                     // 放弃修改
                     this.$set(row, 'isEdit', false)
                 }
             },
             addRelat () {
-                let _relat = {}
-                _relat.mac = this.addForm.mac
-                _relat.ip = `${this.addForm.ip[0]}.${this.addForm.ip[1]}.${this.addForm.ip[2]}.${this.addForm.ip[3]}`
-                this.tableData.push(_relat)
-                // 发送ajax请求
-               // this.$http.post().then()
-                this.dialogFormVisible = false
+                this.$refs['addForm'].validate((valid) => {
+                    if (valid) {
+                        let _relat = {}
+                        _relat.mac = this.addForm.mac
+                        _relat.ip = `${this.addForm.ip[0]}.${this.addForm.ip[1]}.${this.addForm.ip[2]}.${this.addForm.ip[3]}`
+                        this.tableData.push(_relat)
+                        // 发送ajax请求
+                        // this.$http.post().then()
+                        this.dialogFormVisible = false
+                    } else {
+                        return false;
+                    }
+                });
+
             }
         }
     }
@@ -246,8 +228,8 @@
     }
     .num-input {
         vertical-align: middle;
-        width:100px;
-        margin: 10px;
+        width:160px;
+        margin: 9px;
     }
    .dot {
        display: inline-block;
