@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30c6b1b9-eaef-404a-b366-2f80003d8390" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/firewalls-client.iml" afterPath="$PROJECT_DIR$/.idea/firewalls-client.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/Header.vue" afterPath="$PROJECT_DIR$/src/components/common/Header.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/DHCP.vue" afterPath="$PROJECT_DIR$/src/components/page/DHCP.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/Login.vue" afterPath="$PROJECT_DIR$/src/components/page/Login.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/User.vue" afterPath="$PROJECT_DIR$/src/components/page/User.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,7 +37,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/page/User.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
@@ -53,12 +47,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rules.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../firewalls-server/routes/rules.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-              <folding />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="125">
+                <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+                <folding>
+                  <marker date="1502628059025" expanded="true" signature="496:562" ph="{&quot;server.test.com&quot;: &quot;192.168.90.1&quot;...}" />
+                  <marker date="1502628059025" expanded="true" signature="581:682" ph="[...]" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -142,6 +142,7 @@
       <find>add</find>
       <find>del</find>
       <find>de</find>
+      <find>v-for</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,7 +152,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/components/page/DNS.vue" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/../firewalls-server/routes/admin.js" />
         <option value="$PROJECT_DIR$/../firewalls-server/routes/userConfig.js" />
         <option value="$PROJECT_DIR$/../firewalls-server/app.js" />
@@ -159,6 +159,7 @@
         <option value="$PROJECT_DIR$/src/components/page/Login.vue" />
         <option value="$PROJECT_DIR$/src/components/page/DHCP.vue" />
         <option value="$PROJECT_DIR$/src/components/page/User.vue" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -484,12 +485,12 @@
       <option name="presentableId" value="Default" />
       <updated>1502604696336</updated>
       <workItem from="1502604697978" duration="2700000" />
-      <workItem from="1502624119258" duration="3333000" />
+      <workItem from="1502624119258" duration="3934000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6033000" />
+    <option name="totallyTimeSpent" value="6634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -554,20 +555,6 @@
         <state relative-caret-position="250">
           <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="780">
-            <caret line="43" column="18" lean-forward="false" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
-            <folding>
-              <marker date="1502625897020" expanded="true" signature="375:441" ph="{&quot;server.test.com&quot;: &quot;192.168.90.1&quot;...}" />
-              <marker date="1502625897020" expanded="true" signature="460:561" ph="[...]" />
-            </folding>
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -648,6 +635,20 @@
         <state relative-caret-position="172">
           <caret line="34" column="93" lean-forward="false" selection-start-line="34" selection-start-column="93" selection-end-line="34" selection-end-column="93" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="125">
+            <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+            <folding>
+              <marker date="1502628059025" expanded="true" signature="496:562" ph="{&quot;server.test.com&quot;: &quot;192.168.90.1&quot;...}" />
+              <marker date="1502628059025" expanded="true" signature="581:682" ph="[...]" />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

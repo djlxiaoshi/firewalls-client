@@ -1,5 +1,14 @@
 # firewalls manage-system 
 
+项目安装
+
+```
+git clone  https://github.com/djlxiaoshi/firewalls-client.git
+cd firewalls-client
+npm install
+nom run dev
+```
+
 该管理平台前端基于Vue.js 2.x系列 + Element UI开发。
 参考项目[线上地址]()
 
@@ -41,4 +50,4 @@ DNS 模块中将domain_maps的
 
 最后在**IP来源地统计**统计中，国家的代码标识可能要按照地图的配置来，基本就是按照src/assets/json/names.json中国家的字段名来配才行。
 
-后端node.js模拟地址：[]()
+后端node.js模拟地址：[node.js后台模拟服务器](https://github.com/djlxiaoshi/firewalls-serve)
